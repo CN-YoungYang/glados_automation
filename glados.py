@@ -25,7 +25,6 @@ if __name__ == '__main__':
         checkin = requests.post(url,headers={'cookie': cookie ,'referer': referer,'origin':origin,'user-agent':useragent,'content-type':'application/json;charset=UTF-8'},data=json.dumps(payload))
         state =  requests.get(url2,headers={'cookie': cookie ,'referer': referer,'origin':origin,'user-agent':useragent})
     #--------------------------------------------------------------------------------------------------------#  
-        print(state.json())
         time = state.json()['data']['leftDays']
         time = str(time).split('.')[0]
         email = state.json()['data']['email']
