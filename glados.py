@@ -60,11 +60,10 @@ if __name__ == '__main__':
             print('cookie已失效')  # 日志输出
      #--------------------------------------------------------------------------------------------------------#   
     if sckey_push != "":
-        requests.get('http://www.pushplus.plus/send?token=' + sckey_push + '&title='+email+'签到成功'+'&content='+sendContent)
+        requests.get('http://www.pushplus.plus/send?token=' + sckey_push + '&title=Glados 签到成功'+'&content='+sendContent)
 
     if sckey_server != "":
-        print("Server酱请求")
-        ret = sc_send(email, sendContent, sckey_server)
+        sc_send("Glados 签到成功", sendContent, sckey_server)
         
 
 
