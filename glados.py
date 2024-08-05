@@ -1,10 +1,29 @@
 import requests,json,os
+import urllib.parse
+import urllib.request
+
+# -------------------------------------------------------------------------------------------
+# SERVER酱
+# -------------------------------------------------------------------------------------------
+def sc_send(text, desp='', key='[SENDKEY]'):
+    postdata = urllib.parse.urlencode({'text': text, 'desp': desp}).encode('utf-8')
+    url = f'https://sctapi.ftqq.com/{key}.send'
+    req = urllib.request.Request(url, data=postdata, method='POST')
+    with urllib.request.urlopen(req) as response:
+        result = response.read().decode('utf-8')
+    return result
+
+
 # -------------------------------------------------------------------------------------------
 # github workflows
 # -------------------------------------------------------------------------------------------
 if __name__ == '__main__':
 # pushplus秘钥 申请地址 http://www.pushplus.plus
-    sckey = os.environ.get("PUSHPLUS_TOKEN", "")
+    sckey_push = os.environ.get("PUSHPLUS_TOKEN", "")
+
+# Server酱 申请地址 https://sct.ftqq.com/sendkey
+    sckey_server = os.environ.get("SERVER_KEY", "")
+
 # 推送内容
     sendContent = ''
 # glados账号cookie 直接使用数组 如果使用环境变量需要字符串分割一下
@@ -34,10 +53,12 @@ if __name__ == '__main__':
             # print(email+'----结果--'+mess+'----剩余('+time+')天')  # 日志输出
             sendContent += email+'----'+mess+'----剩余('+time+')天\n'
         else:
-            requests.get('http://www.pushplus.plus/send?token=' + sckey + '&content='+email+'cookie已失效')
+            requests.get('http://www.pushplus.plus/send?token=' + sckey_push + '&content='+email+'cookie已失效')
+            sc_send('cookie已失效', email+'cookie已失效', sckey_server)
             print('cookie已失效')  # 日志输出
      #--------------------------------------------------------------------------------------------------------#   
     if sckey != "":
-         requests.get('http://www.pushplus.plus/send?token=' + sckey + '&title='+email+'签到成功'+'&content='+sendContent)
+        requests.get('http://www.pushplus.plus/send?token=' + sckey_push + '&title='+email+'签到成功'+'&content='+sendContent)
+        sc_send(email, sendContent, sckey_server)
 
 
