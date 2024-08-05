@@ -59,10 +59,10 @@ if __name__ == '__main__':
                 sc_send('cookie已失效', email+'cookie已失效', sckey_server)
             print('cookie已失效')  # 日志输出
      #--------------------------------------------------------------------------------------------------------#   
-    print(sckey_server)
     if sckey_push != "":
         requests.get('http://www.pushplus.plus/send?token=' + sckey_push + '&title='+email+'签到成功'+'&content='+sendContent)
 
+    print(sckey_server != "")
     if sckey_server != "":
         print("Server酱请求")
         ret = sc_send(email, sendContent, sckey_server)
