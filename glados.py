@@ -53,12 +53,15 @@ if __name__ == '__main__':
             # print(email+'----结果--'+mess+'----剩余('+time+')天')  # 日志输出
             sendContent += email+'----'+mess+'----剩余('+time+')天\n'
         else:
-            requests.get('http://www.pushplus.plus/send?token=' + sckey_push + '&content='+email+'cookie已失效')
-            sc_send('cookie已失效', email+'cookie已失效', sckey_server)
+            if sckey_push != "":
+                requests.get('http://www.pushplus.plus/send?token=' + sckey_push + '&content='+email+'cookie已失效')
+            if sckey_server != "":  
+                sc_send('cookie已失效', email+'cookie已失效', sckey_server)
             print('cookie已失效')  # 日志输出
      #--------------------------------------------------------------------------------------------------------#   
-    if sckey != "":
+    if sckey_push != "":
         requests.get('http://www.pushplus.plus/send?token=' + sckey_push + '&title='+email+'签到成功'+'&content='+sendContent)
+    if sckey_server != "":
         sc_send(email, sendContent, sckey_server)
 
 
