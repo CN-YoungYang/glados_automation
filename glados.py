@@ -62,7 +62,8 @@ if __name__ == '__main__':
     if sckey_push != "":
         requests.get('http://www.pushplus.plus/send?token=' + sckey_push + '&title='+email+'签到成功'+'&content='+sendContent)
     if sckey_server != "":
+        print("Server酱请求")
         ret = sc_send(email, sendContent, sckey_server)
-        print(ret)
+        
 
 
