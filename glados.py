@@ -51,7 +51,7 @@ if __name__ == '__main__':
             mess = checkin.json()['message']
             print("签到成功") # 日志输出
             # print(email+'----结果--'+mess+'----剩余('+time+')天')  # 日志输出
-            sendContent += email+'----'+mess+'----剩余('+time+')天\n'
+            sendContent += email+'----'+mess+'----剩余('+time+')天\r\n'
         else:
             if sckey_push != "":
                 requests.get('http://www.pushplus.plus/send?token=' + sckey_push + '&content='+email+'cookie已失效')
